@@ -66,7 +66,7 @@ Use the following credentials at the login gateway to explore both roles:
 
 ## 📄 Project Documentation
 For a deep dive into system design and project planning, refer to the included documents:
-*   [SRS.md](SRS.md) - System Requirements Specification
-*   [Diagrams.md](Diagrams.md) - ER & Class Architecture Diagrams
-*   [Maintenance_Plan.md](Maintenance_Plan.md) - Project maintenance strategies
-*   [Test_Cases.md](Test_Cases.md) - Quality assurance protocols
+*   [SRS.md](docs/SRS.md) - System Requirements Specification
+*   [Diagrams.md](docs/Diagrams.md) - ER & Class Architecture Diagrams
+*   [Maintenance_Plan.md](docs/Maintenance_Plan.md) - Project maintenance strategies
+*   [Test_Cases.md](docs/Test_Cases.md) - Quality assurance protocols
