@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus | Disaster Management System</title>
+    <meta name="description" content="Centralized Disaster Management and Emergency Response Dashboard">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Login Screen -->
+    <div class="login-screen" id="login-screen">
+        <div class="login-card glass">
+            <div class="login-header">
+                <div class="logo-circle"></div>
+                <h1>NEXUS</h1>
+                <p>Disaster Response Protocol</p>
+            </div>
+            <div class="role-selector">
+                <div class="role-opt selected" data-role="admin" id="role-admin">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                    <h4>Admin</h4>
+                </div>
+                <div class="role-opt" data-role="user" id="role-user">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2m8-10a4 4 0 100-8 4 4 0 000 8z"></path></svg>
+                    <h4>Reporter</h4>
+                </div>
+            </div>
+            
+            <div class="login-form styled-form">
+                <div class="form-group">
+                    <input type="text" id="login-id" placeholder="Access ID" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="login-pass" placeholder="Authorization Code" required>
+                </div>
+                <div id="login-error" class="text-red" style="font-size: 0.85rem; margin-bottom: 16px; display: none;">Invalid Authorization Credentials</div>
+            </div>
+            
+            <button class="btn btn-primary" id="login-btn" style="width: 100%;">Initialize Session</button>
+        </div>
+    </div>
+
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-circle"></div>
+                <h2>NEXUS</h2>
+                <span class="badge">COMMAND</span>
+            </div>
+            <nav class="nav-menu">
+                <button class="nav-btn active admin-only" data-target="dashboard-view">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"></path></svg>
+                    <span>Dashboard</span>
+                </button>
+                <button class="nav-btn user-only" data-target="report-view">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"></path></svg>
+                    <span>Report Hub</span>
+                </button>
+                <button class="nav-btn" data-target="alert-view">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0zM12 9v4m0 4h.01"></path></svg>
+                    <span>Alerts</span>
+                </button>
+                <button class="nav-btn admin-only" data-target="teams-view">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2m16-10a4 4 0 100-8 4 4 0 000 8z"></path></svg>
+                    <span>Rescue Teams</span>
+                </button>
+                <button class="nav-btn admin-only" data-target="resources-view">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 7h-9M14 17H5m8-5H2"></path></svg>
+                    <span>Resources</span>
+                </button>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <div class="user-avatar">A</div>
+                    <div class="user-details">
+                        <span class="user-name" id="user-display-name">Admin Cmdr</span>
+                        <span class="user-role" id="user-display-role">System Authority</span>
+                    </div>
+                </div>
+                <button class="logout-btn" id="logout-btn">Terminate Session</button>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <header class="top-header">
+                <h1 id="page-title">Dashboard Overview</h1>
+                <div class="header-actions">
+                    <div class="pulse-indicator">
+                        <span class="pulse-dot"></span> System Online
+                    </div>
+                </div>
+            </header>
+
+            <div class="view-container">
+                
+                <!-- Dashboard View -->
+                <section id="dashboard-view" class="view active">
+                    <div class="kpi-grid">
+                        <div class="kpi-card glass">
+                            <h3 class="gradient-text-red">Active Incidents</h3>
+                            <h2 id="kpi-incidents">0</h2>
+                        </div>
+                        <div class="kpi-card glass">
+                            <h3 class="gradient-text-blue">Teams Deployed</h3>
+                            <h2 id="kpi-teams">0</h2>
+                        </div>
+                        <div class="kpi-card glass">
+                            <h3 class="gradient-text-orange">Active Alerts</h3>
+                            <h2 id="kpi-alerts">0</h2>
+                        </div>
+                        <div class="kpi-card glass">
+                            <h3 class="gradient-text-green">Available Resources</h3>
+                            <h2 id="kpi-resources">0</h2>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-grid">
+                        <div class="panel glass map-panel">
+                            <h3>Live Incident Map</h3>
+                            <div class="simulated-map" id="simulated-map">
+                                <div class="map-overlay">Radar Active...</div>
+                            </div>
+                        </div>
+                        <div class="panel glass list-panel">
+                            <h3>Recent Operations</h3>
+                            <ul class="activity-list" id="activity-list">
+                                <!-- Populated dynamically -->
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Report Hub View -->
+                <section id="report-view" class="view">
+                    <div class="panel glass report-panel">
+                        <h2>Submit Incident Report</h2>
+                        <p class="subtitle">Log real-time emergency situations for immediate action.</p>
+                        <form id="report-form" class="styled-form">
+                            <div class="form-group">
+                                <label for="report-location">Location coordinates / Address</label>
+                                <input type="text" id="report-location" required placeholder="e.g. Sector 7, Downtown">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group half">
+                                    <label for="report-type">Disaster Type</label>
+                                    <select id="report-type" required>
+                                        <option value="Fire">Industrial / Urban Fire</option>
+                                        <option value="Flood">Flooding</option>
+                                        <option value="Earthquake">Earthquake</option>
+                                        <option value="Medical">Medical Emergency</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                                <div class="form-group half">
+                                    <label for="report-severity">Severity Level</label>
+                                    <select id="report-severity" required>
+                                        <option value="Low">Low - Monitored</option>
+                                        <option value="Medium">Medium - Response Needed</option>
+                                        <option value="High" class="text-red">High - Critical Issue</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="report-desc">Detailed Description</label>
+                                <textarea id="report-desc" rows="4" placeholder="Provide operational intelligence..."></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Transmit Report</button>
+                        </form>
+                    </div>
+                </section>
+
+                <!-- Alert View -->
+                <section id="alert-view" class="view">
+                    <div class="split-layout">
+                        <div class="panel glass">
+                            <h2>Broadcast New Alert</h2>
+                            <form id="alert-form" class="styled-form">
+                                <div class="form-group">
+                                    <label for="alert-region">Affected Region</label>
+                                    <input type="text" id="alert-region" required placeholder="All Sectors">
+                                </div>
+                                <div class="form-group">
+                                    <label for="alert-severity">Alert Level</label>
+                                    <select id="alert-severity" required>
+                                        <option value="Warning">Warning (Yellow)</option>
+                                        <option value="Critical">Critical (Red)</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="alert-msg">Public Message</label>
+                                    <textarea id="alert-msg" rows="3" required placeholder="Evacuation advised..."></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-danger">Broadcast Alert</button>
+                            </form>
+                        </div>
+                        <div class="panel glass">
+                            <h2>Active Broadcasts</h2>
+                            <div class="alert-list-container" id="alert-list-container">
+                                <!-- Dynamic alerts -->
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Rescue Teams View -->
+                <section id="teams-view" class="view">
+                    <div class="panel glass full-height">
+                        <h2>Team Registry & Deployment</h2>
+                        <div class="table-responsive">
+                            <table class="styled-table" id="teams-table">
+                                <thead>
+                                    <tr>
+                                        <th>Team Designation</th>
+                                        <th>Specialization</th>
+                                        <th>Personnel</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Dynamic rows -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Resources View -->
+                <section id="resources-view" class="view">
+                    <div class="resource-grid" id="resource-container">
+                        <!-- Dynamic generated resource cards -->
+                    </div>
+                    <div class="panel glass dispatch-panel" style="margin-top: 2rem;">
+                        <h2>Dispatch Requisition</h2>
+                        <form id="dispatch-form" class="styled-form form-row-inline">
+                            <div class="form-group split">
+                                <label>Target Resource</label>
+                                <select id="dispatch-type" required>
+                                    <option value="Medical">Trauma Kits</option>
+                                    <option value="Water">Potable Water</option>
+                                    <option value="Food">MRE Rations</option>
+                                    <option value="Equipment">Heavy Equip</option>
+                                </select>
+                            </div>
+                            <div class="form-group split">
+                                <label>Quantity</label>
+                                <input type="number" id="dispatch-qty" required min="1" placeholder="0">
+                            </div>
+                            <div class="form-group split">
+                                <label>&nbsp;</label>
+                                <button type="submit" class="btn btn-primary" style="width:100%">Authorize Dispatch</button>
+                            </div>
+                        </form>
+                    </div>
+                </section> <!-- /Resources -->
+
+            </div> <!-- /view-container -->
+        </main>
+    </div>
+    
+    <!-- Notification Toast Container -->
+    <div id="toast-container"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
