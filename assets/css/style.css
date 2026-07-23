@@ -84,8 +84,10 @@ body {
     width: 32px;
     height: 32px;
     border-radius: 50%;
-    background: linear-gradient(135deg, var(--brand-primary), var(--accent-indigo));
+    background: url('../images/nexus_logo.jpg') no-repeat center 35%;
+    background-size: 140%;
     box-shadow: 0 0 15px var(--brand-primary);
+    border: 1px solid rgba(59, 130, 246, 0.3);
 }
 
 .sidebar-header h2 {
