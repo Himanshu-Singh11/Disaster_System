@@ -1,5 +1,9 @@
 # 🌌 Nexus | Centralized Disaster Management & Emergency Response System
 
+<p align="center">
+  <img src="assets/images/nexus_logo.jpg" alt="Nexus Logo" width="180" height="180" style="border-radius: 20px; box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);"/>
+</p>
+
 [![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)](https://html.spec.whatwg.org/)
 [![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)](https://www.w3.org/Style/CSS/)
 [![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
